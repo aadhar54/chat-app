@@ -7,6 +7,11 @@ const server = http.createServer(app)
 const io = socketio(server)
 
 io.on('connection',(socket)=>{
+
+    socket.on('msg_snd',(data)=>{
+        console.log('server to client')
+        socket.broadcast.emit('msg_rcvd',data)
+    })
     console.log('connected with socket id',socket.id)  
 })
 
